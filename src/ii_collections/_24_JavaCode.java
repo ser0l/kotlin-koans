@@ -8,6 +8,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.groupingBy;
+
 public class _24_JavaCode extends JavaCode {
     public Collection<String> doSomethingStrangeWithCollection(Collection<String> collection) {
         Map<Integer, List<String>> groupsByLength = Maps.newHashMap();
@@ -33,5 +36,14 @@ public class _24_JavaCode extends JavaCode {
             }
         }
         return null;
+    }
+
+    public Collection<String> javaStreamCode(Collection<String> collection) {
+        return collection.stream()
+                .collect(groupingBy(String::length))
+                .values()
+                .stream()
+                .max(comparing(List::size))
+                .orElse(null);
     }
 }
